@@ -1,0 +1,14 @@
+.tc-steps { margin: 0; padding: 0; list-style: none; counter-reset: step; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-flow: column; grid-template-rows: repeat(5, auto); gap: 8px; }
+.tc-steps li { counter-increment: step; display: flex; flex-wrap: nowrap; align-items: center; gap: 10px; padding: 8px 12px; border-radius: 10px; background: var(--surface-2); border: 1px solid var(--line); min-height: 46px; }
+.tc-steps li::before { content: counter(step); display: inline-grid; place-items: center; width: 20px; height: 20px; border-radius: 6px; background: var(--surface-3); color: var(--text-3); font-size: 11px; font-weight: 700; flex: none; }
+.tc-steps li:has(input:checked)::before, .tc-steps li.on::before { background: var(--accent-soft); color: var(--accent); }
+.tc-steps li > .tc-sub, .tc-steps li > .btn { margin-left: auto; }
+.tc-steps .check { white-space: nowrap; }
+@media (max-width: 700px) { .tc-steps { grid-template-columns: minmax(0, 1fr); grid-auto-flow: row; grid-template-rows: none; } .tc-steps li { flex-wrap: wrap; } }
+.tc-sub { font-size: 12.5px; }
+.tc-lbl { color: var(--text-2); font-size: 13.5px; }
+.tc-steps .seg button { padding: 4px 10px; font-size: 12.5px; }
+.tc-grid { align-items: start; }
+.tc-box { min-height: 320px; max-height: 560px; overflow: auto; }
+.tc-out { margin: 0; }
+.tc-out:empty::before { content: "The cleaned text appears here."; color: var(--text-3); font-family: var(--font); }

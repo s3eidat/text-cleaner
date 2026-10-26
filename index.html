@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; media-src 'self' data: blob:; connect-src 'self' data: blob:; worker-src 'self' blob:; manifest-src 'self'; form-action 'none'; base-uri 'none'; object-src 'none'">
+<meta name="referrer" content="no-referrer">
+<title>Text Cleaner — Remove Duplicate Lines, Extra Spaces, Sort Lines | S3eidat Tools</title>
+<meta name="description" content="Clean up text in one go: trim lines, collapse spaces, remove empty and duplicate lines, sort A–Z or naturally, shuffle, number lines, strip HTML tags and emojis. Free, private, runs in your browser.">
+<meta property="og:title" content="Text Cleaner — free, private text and line cleanup">
+<meta property="og:description" content="Remove duplicates, extra spaces, sort lines. Runs 100% in your browser.">
+<meta property="og:image" content="screenshot.png">
+<link rel="icon" href="kit/icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="kit/kit.css">
+<link rel="stylesheet" href="app.css">
+<script src="kit/kit.js"></script>
+</head>
+<body data-tool="text-cleaner">
+<main class="s3-main">
+  <section class="s3-hero">
+    <h1>Text Cleaner</h1>
+    <p>Switch on the clean-up steps you need. They run top to bottom, and the result updates as you type.</p>
+  </section>
+
+  <section class="card">
+    <div class="row between">
+      <h2>Steps <small>applied in this order</small></h2>
+      <button class="btn ghost small" id="reset">Reset steps</button>
+    </div>
+    <ol class="tc-steps" id="steps">
+      <li><label class="check"><input type="checkbox" data-o="html"> Strip HTML tags</label></li>
+      <li><label class="check"><input type="checkbox" data-o="emoji"> Remove emojis</label></li>
+      <li><label class="check"><input type="checkbox" data-o="trim" checked> Trim each line</label></li>
+      <li><label class="check"><input type="checkbox" data-o="collapse" checked> Collapse repeated spaces</label></li>
+      <li><label class="check"><input type="checkbox" data-o="empty" checked> Remove empty lines</label></li>
+      <li class="tc-wide">
+        <label class="check"><input type="checkbox" data-o="dupes"> Remove duplicate lines</label>
+        <label class="check tc-sub"><input type="checkbox" data-o="ignoreCase"> ignore case</label>
+      </li>
+      <li class="tc-sort tc-wide">
+        <span class="tc-lbl">Sort</span>
+        <div class="seg" id="sort" role="group" aria-label="Sort">
+          <button aria-pressed="true" data-v="none">Off</button>
+          <button aria-pressed="false" data-v="az">A–Z</button>
+          <button aria-pressed="false" data-v="za">Z–A</button>
+          <button aria-pressed="false" data-v="natural">Natural</button>
+          <button aria-pressed="false" data-v="length">Length</button>
+        </div>
+      </li>
+      <li><label class="check"><input type="checkbox" data-o="reverse"> Reverse line order</label></li>
+      <li>
+        <label class="check"><input type="checkbox" data-o="shuffle"> Shuffle lines</label>
+        <button class="btn ghost small" id="reshuffle" title="Shuffle again"><svg class="i"><use href="#i-refresh"/></svg>Again</button>
+      </li>
+      <li><label class="check"><input type="checkbox" data-o="number"> Add line numbers</label></li>
+    </ol>
+  </section>
+
+  <div class="grid-2 tc-grid mt">
+    <section class="card">
+      <div class="row between">
+        <h2>Input</h2>
+        <div class="row">
+          <button class="btn ghost small" id="sample">Sample</button>
+          <label class="btn ghost small" id="open">Open<input type="file" accept=".txt,.csv,.md,.html,.htm,text/*" hidden></label>
+          <button class="btn ghost small" id="clear"><svg class="i"><use href="#i-trash"/></svg>Clear</button>
+        </div>
+      </div>
+      <label for="input" class="faint">Text to clean</label>
+      <textarea class="textarea tc-box mt" id="input" dir="auto" spellcheck="false" placeholder="Paste a list, a messy document or some HTML…"></textarea>
+    </section>
+
+    <section class="card">
+      <div class="row between">
+        <h2>Result</h2>
+        <div class="row">
+          <button class="btn small" id="use">Use as input</button>
+          <button class="btn small" id="save"><svg class="i"><use href="#i-download"/></svg>.txt</button>
+          <button class="btn small primary" id="copy"><svg class="i"><use href="#i-copy"/></svg>Copy</button>
+        </div>
+      </div>
+      <pre class="out tc-box tc-out mt" id="out" tabindex="0" dir="auto" aria-live="polite"></pre>
+    </section>
+  </div>
+  <section class="card mt">
+    <div class="stats" id="stats"></div>
+  </section>
+</main>
+<script src="app.js"></script>
+</body>
+</html>
